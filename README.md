@@ -1,6 +1,6 @@
-# evmos-ledger-go
+# serv-ledger-go
 
-Helper library for implementing Ledger support in the Evmos CLI. This wraps [Ethereum-Ledger-Go](https://github.com/evmos/ethereum-ledger-go) to provide
+Helper library for implementing Ledger support in the Evmos CLI. This wraps [Ethereum-Ledger-Go](https://github.com/Serv/ethereum-ledger-go) to provide
 a Ledger interface that is compatible (with minor additions) with the Cosmos SDK.
 
 ## Overview

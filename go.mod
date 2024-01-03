@@ -1,11 +1,11 @@
-module github.com/evmos/evmos-ledger-go
+module github.com/twobitedd/serv-ledger-go
 
 go 1.20
 
 require (
 	github.com/cosmos/cosmos-sdk v0.46.13
 	github.com/ethereum/go-ethereum v1.11.5
-	github.com/evmos/evmos/v14 v14.0.0-rc1.0.20230804130823-14b27ff21a9f
+	github.com/twobitedd/serv/v12 v12.2.0
 	github.com/stretchr/testify v1.8.4
 	github.com/zondax/hid v0.9.1
 )

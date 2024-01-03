@@ -19,17 +19,17 @@ import (
 	auxTx "github.com/cosmos/cosmos-sdk/x/auth/tx"
 	bankTypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	"github.com/evmos/evmos-ledger-go/accounts"
-	"github.com/evmos/evmos-ledger-go/ledger"
-	"github.com/evmos/evmos-ledger-go/ledger/mocks"
-	"github.com/evmos/evmos-ledger-go/usbwallet"
+	"github.com/twobitedd/serv-ledger-go/accounts"
+	"github.com/twobitedd/serv-ledger-go/ledger"
+	"github.com/twobitedd/serv-ledger-go/ledger/mocks"
+	"github.com/twobitedd/serv-ledger-go/usbwallet"
 )
 
 type LedgerTestSuite struct {
 	suite.Suite
 	txAmino    []byte
 	txProtobuf []byte
-	ledger     ledger.EvmosSECP256K1
+	ledger     ledger.ServSECP256K1
 	mockWallet *mocks.Wallet
 	hrp        string
 }
@@ -39,7 +39,7 @@ func TestLedgerTestSuite(t *testing.T) {
 }
 
 func (suite *LedgerTestSuite) SetupTest() {
-	suite.hrp = "evmos"
+	suite.hrp = "serv"
 
 	suite.txAmino = suite.getMockTxAmino()
 	suite.txProtobuf = suite.getMockTxProtobuf()
@@ -49,7 +49,7 @@ func (suite *LedgerTestSuite) SetupTest() {
 
 	mockWallet := new(mocks.Wallet)
 	suite.mockWallet = mockWallet
-	suite.ledger = ledger.EvmosSECP256K1{Hub: hub, PrimaryWallet: mockWallet}
+	suite.ledger = ledger.ServSECP256K1{Hub: hub, PrimaryWallet: mockWallet}
 }
 
 func (suite *LedgerTestSuite) initWallet(path gethaccounts.DerivationPath, ledger *usbwallet.Hub) (accounts.Wallet, accounts.Account) {
@@ -81,7 +81,7 @@ func (suite *LedgerTestSuite) getMockTxAmino() []byte {
 	tmp := whitespaceRegex.ReplaceAllString(
 		`{
 			"account_number": "0",
-			"chain_id":"evmos_9000-1",
+			"chain_id":"serv_53970-1",
 			"fee":{
 				"amount":[{"amount":"150","denom":"atom"}],
 				"gas":"20000"
@@ -160,7 +160,7 @@ func (suite *LedgerTestSuite) getMockTxProtobuf() []byte {
 	signBytes, err := auxTx.DirectSignBytes(
 		bodyBytes,
 		authInfoBytes,
-		"evmos_9000-1",
+		"serv_53970-1",
 		0,
 	)
 	suite.Require().NoError(err)

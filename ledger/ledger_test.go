@@ -5,11 +5,11 @@ import (
 	gethaccounts "github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/evmos/evmos-ledger-go/accounts"
-	"github.com/evmos/evmos-ledger-go/ledger"
-	"github.com/evmos/evmos/v14/app"
-	"github.com/evmos/evmos/v14/encoding"
-	"github.com/evmos/evmos/v14/ethereum/eip712"
+	"github.com/twobitedd/serv-ledger-go/accounts"
+	"github.com/twobitedd/serv-ledger-go/ledger"
+	"github.com/twobitedd/serv/v12/app"
+	"github.com/twobitedd/serv/v12/encoding"
+	"github.com/twobitedd/serv/v12/ethereum/eip712"
 )
 
 // Test Mnemonic:
@@ -22,7 +22,7 @@ func init() {
 	sdk.GetConfig().SetBech32PrefixForAccount("cosmos", "")
 }
 
-func (suite *LedgerTestSuite) TestEvmosLedgerDerivation() {
+func (suite *LedgerTestSuite) TestServLedgerDerivation() {
 	testCases := []struct {
 		name     string
 		mockFunc func()
@@ -38,7 +38,7 @@ func (suite *LedgerTestSuite) TestEvmosLedgerDerivation() {
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
 			suite.SetupTest() // reset
-			derivationFunc := ledger.EvmosLedgerDerivation()
+			derivationFunc := ledger.ServLedgerDerivation()
 			_, err := derivationFunc()
 			if tc.expPass {
 				suite.Require().NoError(err)
@@ -215,7 +215,7 @@ func (suite *LedgerTestSuite) TestGetAddressPubKeySECP256K1() {
 	suite.Require().NoError(err)
 
 	addr := crypto.PubkeyToAddress(privKey.PublicKey)
-	expAddr, err := sdk.Bech32ifyAddressBytes("evmos", common.HexToAddress(addr.String()).Bytes())
+	expAddr, err := sdk.Bech32ifyAddressBytes("sx", common.HexToAddress(addr.String()).Bytes())
 	suite.Require().NoError(err)
 
 	testCases := []struct {
